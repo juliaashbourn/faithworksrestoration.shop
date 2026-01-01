@@ -1,127 +1,695 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HUNANIMA - Machines Agricoles Simples</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faithworks Restoration Project LLC – Restauration & Rénovation</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #fefefe;
-      color: #333;
+    :root{
+      --bg:#070A12;
+      --bg2:#0B1020;
+      --card:#0F162C;
+      --text:#FFFFFF;
+      --muted:rgba(255,255,255,.72);
+      --line:rgba(255,255,255,.12);
+      --accent:#FF7A18;    /* orange pro construction */
+      --accent2:#FFC857;   /* gold */
+      --ok:#2DFFB7;
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --radius: 22px;
     }
-    header {
-      background-color: #2e7d32; /* Vert foncé */
-      color: #fdd835; /* Jaune vif */
-      padding: 20px;
-      text-align: center;
+
+    *{box-sizing:border-box;scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(255,122,24,.18), transparent 45%),
+        radial-gradient(circle at 90% 15%, rgba(255,200,87,.10), transparent 50%),
+        radial-gradient(circle at 50% 100%, rgba(92,134,255,.08), transparent 55%),
+        linear-gradient(180deg, #050710 0%, #070A12 55%, #060810 100%);
+      overflow-x:hidden;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Container */
+    .container{max-width:1200px;margin:0 auto;padding:0 18px}
+
+    /* Top bar */
+    .topbar{
+      background: rgba(5,7,16,.7);
+      border-bottom:1px solid var(--line);
+      backdrop-filter: blur(14px);
     }
-    header p {
-      margin: 5px 0 0;
-      font-size: 1.2em;
+    .topbar-inner{
+      display:flex;gap:12px;align-items:center;justify-content:space-between;
+      padding:10px 0;font-size:.86rem;color:var(--muted);
     }
-    nav {
-      background-color: #fdd835;
-      padding: 10px;
-      text-align: center;
+    .topbar-left{display:flex;gap:16px;flex-wrap:wrap}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:6px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
     }
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-      color: #2e7d32;
+    .dot{
+      width:8px;height:8px;border-radius:999px;background:var(--ok);
+      box-shadow: 0 0 16px rgba(45,255,183,.55);
     }
-    .hero {
-      background: url('https://i.pinimg.com/550x/a9/df/51/a9df5172829f8c05f5b92f97553d41ae.jpg') no-repeat center center/cover;
-      height: 350px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-shadow: 2px 2px 4px #000;
-      font-size: 2em;
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      background: rgba(7,10,18,.82);
+      backdrop-filter: blur(18px);
+      border-bottom:1px solid rgba(255,255,255,.08);
     }
-    section {
-      padding: 50px 20px;
-      text-align: center;
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:18px;
+      padding:14px 0;
     }
-    section h2 {
-      color: #2e7d32;
-      margin-bottom: 20px;
+    .brand{
+      display:flex;align-items:center;gap:12px;min-width:220px;
     }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    .logo{
+      width:52px;height:52px;border-radius:16px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.16);
+      box-shadow: 0 0 0 2px rgba(255,122,24,.12);
+      background:#0A0D18;
     }
-    .gallery img {
-      width: 280px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    .brand h1{
+      margin:0;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;
     }
-    footer {
-      background-color: #2e7d32;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
+    .brand small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
+    nav ul{
+      list-style:none;margin:0;padding:0;
+      display:flex;gap:22px;align-items:center;
+      font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
     }
-    footer p {
-      margin: 5px 0;
+    nav a{opacity:.78;position:relative}
+    nav a::after{
+      content:"";position:absolute;left:0;bottom:-8px;height:2px;width:0;
+      background: linear-gradient(90deg,var(--accent),var(--accent2));
+      transition: width .2s ease;
+    }
+    nav a:hover{opacity:1}
+    nav a:hover::after{width:100%}
+
+    .nav-cta{display:flex;gap:10px;align-items:center}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:10px 16px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background:transparent;color:var(--text);
+      font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+      cursor:pointer;transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{background: rgba(255,255,255,.06)}
+    .btn-primary{
+      border-color:transparent;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#120A02;
+      box-shadow: 0 16px 45px rgba(255,122,24,.28);
+      font-weight:700;
+    }
+    .btn-primary:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 22px 65px rgba(255,122,24,.40);
+    }
+    .mini{
+      font-size:.82rem;color:var(--muted);white-space:nowrap;
+    }
+
+    /* Hero */
+    .hero{
+      position:relative;
+      padding:64px 0 18px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: minmax(0,1.25fr) minmax(0,1fr);
+      gap:34px;align-items:center;
+      padding:28px 0 38px;
+    }
+    .kicker{
+      display:inline-flex;gap:10px;align-items:center;
+      font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+      color:rgba(255,255,255,.78);
+      margin-bottom:14px;
+    }
+    .kicker .spark{
+      width:10px;height:10px;border-radius:999px;background:var(--accent);
+      box-shadow: 0 0 18px rgba(255,122,24,.65);
+    }
+    .hero h2{
+      margin:0 0 12px;
+      font-size: clamp(2.1rem, 3vw + 1rem, 3.4rem);
+      line-height:1.06;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+    }
+    .hero h2 span{color:var(--accent2)}
+    .hero p{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:1rem;
+      max-width:560px;
+    }
+    .hero-badges{
+      display:flex;flex-wrap:wrap;gap:10px;margin: 10px 0 20px;
+    }
+    .badge{
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.20);
+      font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
+      color:rgba(255,255,255,.85);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+    .hero-note{
+      margin-top:14px;
+      font-size:.88rem;color:rgba(255,255,255,.70);
+    }
+
+    .hero-card{
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: radial-gradient(circle at top, rgba(255,255,255,.07), rgba(15,22,44,.95));
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+    }
+    .hero-card .img{
+      height:230px;overflow:hidden;position:relative;
+    }
+    .hero-card .img img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);opacity:.92}
+    .hero-card .img::after{
+      content:"";position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55));
+    }
+    .hero-card .body{padding:18px}
+    .hero-card h3{
+      margin:0 0 8px;font-size:.98rem;
+      letter-spacing:.16em;text-transform:uppercase;
+    }
+    .hero-card p{margin:0;color:var(--muted);font-size:.9rem}
+    .hero-stats{
+      display:grid;grid-template-columns: repeat(3, minmax(0,1fr));
+      gap:10px;padding:14px 18px 18px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+    }
+    .stat{
+      padding:10px 12px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(10,12,22,.6);
+    }
+    .stat strong{display:block;font-size:1.05rem}
+    .stat span{display:block;color:rgba(255,255,255,.70);font-size:.78rem;margin-top:2px}
+
+    /* Sections */
+    section{padding:68px 0}
+    .section-head{
+      display:flex;flex-direction:column;gap:8px;margin-bottom:28px;
+    }
+    .eyebrow{
+      font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+      color:rgba(255,255,255,.62);
+    }
+    .title{
+      margin:0;
+      font-size:1.7rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .title span{color:var(--accent)}
+    .desc{margin:0;color:var(--muted);max-width:720px}
+
+    /* Services */
+    .grid-3{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .card{
+      border-radius: var(--radius);
+      background: rgba(15,22,44,.85);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,.26);
+    }
+    .card .cover{
+      height:170px;overflow:hidden;position:relative;
+    }
+    .card .cover img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);opacity:.92}
+    .card .cover::after{
+      content:"";position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.55));
+    }
+    .card .content{padding:16px 16px 18px}
+    .tag{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+      color:rgba(255,255,255,.78);
+      margin-bottom:8px;
+    }
+    .tag i{
+      width:10px;height:10px;border-radius:999px;background:var(--accent2);
+      box-shadow: 0 0 18px rgba(255,200,87,.45);
+      display:inline-block;
+    }
+    .card h4{margin:0 0 8px;font-size:1.02rem}
+    .card p{margin:0 0 12px;color:var(--muted);font-size:.9rem}
+    .list{
+      margin:0;padding-left:18px;color:rgba(255,255,255,.78);font-size:.86rem;
+    }
+    .list li{margin:6px 0}
+
+    /* Process */
+    .steps{
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+    .step{
+      border-radius: 18px;
+      padding:14px 14px 16px;
+      border:1px dashed rgba(255,255,255,.22);
+      background: rgba(0,0,0,.16);
+    }
+    .num{
+      width:30px;height:30px;border-radius:999px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:.82rem;
+      background: linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#120A02;
+      box-shadow: 0 0 22px rgba(255,122,24,.35);
+      margin-bottom:10px;
+    }
+    .step h5{margin:0 0 6px;font-size:.95rem}
+    .step p{margin:0;color:var(--muted);font-size:.86rem}
+
+    /* Projects */
+    .projects{
+      display:grid;grid-template-columns: 1.1fr .9fr;gap:18px;align-items:stretch;
+    }
+    .project-big, .project-small{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(15,22,44,.85);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      position:relative;
+    }
+    .project-big img, .project-small img{
+      width:100%;height:100%;object-fit:cover;opacity:.90;transform:scale(1.03);
+    }
+    .overlay{
+      position:absolute;inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.72));
+    }
+    .caption{
+      position:absolute;left:16px;right:16px;bottom:14px;
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .caption strong{
+      font-size:1rem;letter-spacing:.10em;text-transform:uppercase;
+    }
+    .caption span{color:rgba(255,255,255,.78);font-size:.88rem}
+
+    /* Contact */
+    .contact{
+      display:grid;grid-template-columns: 1fr 1fr;gap:18px;
+      align-items:start;
+    }
+    .box{
+      border-radius: var(--radius);
+      background: rgba(15,22,44,.88);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      padding:18px;
+    }
+    .box p{margin:8px 0;color:var(--muted)}
+    .box strong{color:#fff}
+    .hint{font-size:.82rem;color:rgba(255,255,255,.65)}
+
+    form .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    label{display:block;font-size:.8rem;opacity:.85;margin-bottom:6px}
+    input, textarea{
+      width:100%;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.20);
+      background: rgba(6,8,16,.72);
+      color:#fff;
+      font-family:inherit;
+      outline:none;
+      transition: box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    }
+    textarea{min-height:120px;resize:vertical}
+    input:focus, textarea:focus{
+      border-color: rgba(255,122,24,.65);
+      box-shadow: 0 0 0 2px rgba(255,122,24,.18);
+      background: rgba(10,12,22,.8);
+    }
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      padding:18px 0 22px;
+      color:rgba(255,255,255,.75);
+      font-size:.82rem;
+      text-align:center;
+    }
+    footer b{color:var(--accent2)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:repeat(2,1fr)}
+      .steps{grid-template-columns:repeat(2,1fr)}
+      .projects{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      nav ul{display:none}
+    }
+    @media (max-width: 640px){
+      .grid-3{grid-template-columns:1fr}
+      form .row{grid-template-columns:1fr}
+      .hero-stats{grid-template-columns:1fr}
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>HUNANIMA</h1>
-    <p>Machines Agricoles Simples et Fiables</p>
-  </header>
-
-  <nav>
-    <a href="#about">À propos</a>
-    <a href="#gallery">Galerie</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <div class="hero">
-    <p>Votre partenaire pour des machines agricoles durables</p>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="pill"><span class="dot"></span> Intervention rapide & planification</span>
+        <span class="pill">Rénovation • Restauration • Remise en état</span>
+      </div>
+      <div class="topbar-right">
+        <span class="pill">info@faithworksrestoration.shop</span>
+      </div>
+    </div>
   </div>
 
-  <section id="about">
-    <h2>À propos de nous</h2>
-    <p>
-      Chez <strong>HUNANIMA</strong>, nous nous spécialisons dans la fabrication et la distribution de 
-      <strong>machines agricoles simples</strong> pour faciliter le travail des agriculteurs. 
-      Nos solutions combinent <em>durabilité, efficacité et innovation</em> afin de répondre aux besoins de toutes les exploitations.
-    </p>
-  </section>
+  <!-- HEADER -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <img src="https://t3.ftcdn.net/jpg/01/48/27/20/360_F_148272000_jkDQGEXYk9ooajBo5dqgd9vFlAAk2URc.jpg" alt="Faithworks Restoration">
+        </div>
+        <div>
+          <h1>Faithworks Restoration</h1>
+          <small>Restoration Project LLC • Van Nuys, CA</small>
+        </div>
+      </div>
 
-  <section id="gallery">
-    <h2>Nos Machines</h2>
-    <div class="gallery">
-      <img src="http://ogden_images.s3.amazonaws.com/www.motherearthnews.com/images/2014/11/22234423/Boaz-Mini-Combine-jpg.jpg" alt="Mini moissonneuse">
-      <img src="https://krs-agro.ru/products/zagotovka_kormov/elho/19/7.jpg" alt="Machine agricole">
-      <img src="https://img.mod-network.net/files/images/6218ac69d37fb/SimpleFarmSilov1000_6222.jpg" alt="Équipement agricole simple">
+      <nav>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#process">Méthode</a></li>
+          <li><a href="#realisations">Réalisations</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-cta">
+        <span class="mini">📞 (484) 890-7160</span>
+        <a class="btn btn-primary" href="#contact">Demander un devis</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="kicker"><span class="spark"></span> Restauration & rénovation – approche professionnelle</div>
+        <h2>
+          Des travaux <span>propres, rapides</span><br/>
+          et gérés avec précision.
+        </h2>
+        <p>
+          <b>Faithworks Restoration Project LLC</b> accompagne les particuliers et professionnels
+          pour la remise en état, la rénovation et les interventions de restauration.
+          Notre priorité : une exécution claire, un suivi sérieux et un résultat durable.
+        </p>
+
+        <div class="hero-badges">
+          <div class="badge">Rénovation intérieure</div>
+          <div class="badge">Réparations & finitions</div>
+          <div class="badge">Chantiers résidentiels & commerciaux</div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#services">Voir les services</a>
+          <a class="btn" href="#realisations">Nos réalisations</a>
+        </div>
+
+        <div class="hero-note">
+          📩 Réponse rapide par email : <b>info@faithworksrestoration.shop</b> •
+          📞 <b>(484) 890-7160</b>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="img">
+          <img src="https://www.drfbuilders.com/wp-content/uploads/2024/07/commercial-general-contractor.webp" alt="Chantier – équipe et gestion">
+        </div>
+        <div class="body">
+          <h3>Gestion chantier & qualité</h3>
+          <p>
+            Nous structurons le chantier avec une méthode simple : diagnostic, planification,
+            exécution, contrôle qualité et livraison. Objectif : zéro stress, résultat net.
+          </p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>Planning</strong><span>délais cadrés</span></div>
+          <div class="stat"><strong>Qualité</strong><span>finitions propres</span></div>
+          <div class="stat"><strong>Suivi</strong><span>communication claire</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Nos services</div>
+        <h3 class="title">Solutions <span>de restauration</span> & rénovation</h3>
+        <p class="desc">
+          Offre modulable ou clé en main, selon la nature du chantier. Nous intervenons sur la préparation,
+          la réparation, les finitions et la remise en état.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="cover">
+            <img src="https://idsb.tmgrup.com.tr/ly/uploads/images/2020/05/19/thumbs/800x531/36603.jpg" alt="Rénovation intérieure">
+          </div>
+          <div class="content">
+            <div class="tag"><i></i> Intérieur</div>
+            <h4>Rénovation & aménagement</h4>
+            <p>Optimisation des espaces, réparations, mise à niveau et finitions.</p>
+            <ul class="list">
+              <li>Réparations murs, plafonds, sols</li>
+              <li>Finitions, peinture, détails</li>
+              <li>Aménagement et remise en état</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="cover">
+            <img src="https://media.gettyimages.com/id/1309642967/video/building-contractor-using-a-digital-tablet-at-the-construction-site.jpg?s=640x640&k=20&c=VFHbTEcPdFDDUAXryAbjCoGUhSECJKyOEWYG3wapc9w=" alt="Gestion et coordination">
+          </div>
+          <div class="content">
+            <div class="tag"><i></i> Coordination</div>
+            <h4>Gestion de projet chantier</h4>
+            <p>Suivi, coordination et reporting pour un chantier maîtrisé.</p>
+            <ul class="list">
+              <li>Diagnostic & planification</li>
+              <li>Coordination sur site</li>
+              <li>Contrôle qualité & livraison</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="cover">
+            <img src="https://avatars.mds.yandex.net/i?id=70aa72b74081fc7bfaa1cd335c3a154a537f3706c5e21ec7-6906583-images-thumbs&n=13" alt="Réparation et remise en état">
+          </div>
+          <div class="content">
+            <div class="tag"><i></i> Restauration</div>
+            <h4>Remise en état & réparations</h4>
+            <p>Interventions ciblées pour remettre votre espace au meilleur niveau.</p>
+            <ul class="list">
+              <li>Réparations structurelles légères</li>
+              <li>Remise en état après dégâts</li>
+              <li>Finitions & nettoyage de fin de chantier</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Méthode</div>
+        <h3 class="title">Une approche <span>simple</span>, efficace</h3>
+        <p class="desc">
+          Chaque chantier suit une feuille de route claire pour éviter les surprises et assurer
+          un résultat professionnel.
+        </p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num">01</div>
+          <h5>Diagnostic</h5>
+          <p>Analyse du besoin, état des lieux, définition du périmètre des travaux.</p>
+        </div>
+        <div class="step">
+          <div class="num">02</div>
+          <h5>Devis & planning</h5>
+          <p>Devis structuré, calendrier d’intervention, priorisation des tâches.</p>
+        </div>
+        <div class="step">
+          <div class="num">03</div>
+          <h5>Exécution</h5>
+          <p>Travaux réalisés proprement, coordination, suivi et points d’avancement.</p>
+        </div>
+        <div class="step">
+          <div class="num">04</div>
+          <h5>Contrôle & livraison</h5>
+          <p>Vérification qualité, finitions, remise du chantier et recommandations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REALISATIONS -->
+  <section id="realisations">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Réalisations</div>
+        <h3 class="title">Un rendu <span>net</span> et durable</h3>
+        <p class="desc">
+          Exemples visuels (illustrations) pour représenter l’esprit du service : sérieux, qualité, contrôle.
+        </p>
+      </div>
+
+      <div class="projects" style="min-height:420px;">
+        <div class="project-big">
+          <img src="https://www.drfbuilders.com/wp-content/uploads/2024/07/commercial-general-contractor.webp" alt="Projet commercial">
+          <div class="overlay"></div>
+          <div class="caption">
+            <strong>Rénovation commerciale</strong>
+            <span>Coordination, planification et finitions haut niveau.</span>
+          </div>
+        </div>
+
+        <div class="project-small">
+          <img src="https://idsb.tmgrup.com.tr/ly/uploads/images/2020/05/19/thumbs/800x531/36603.jpg" alt="Projet intérieur">
+          <div class="overlay"></div>
+          <div class="caption">
+            <strong>Intérieur & finitions</strong>
+            <span>Remise en état, peinture, détails propres.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
   <section id="contact">
-    <h2>Contactez-nous</h2>
-    <p><strong>Email :</strong> admin@tyusex.shop</p>
-    <p><strong>Téléphone :</strong> +33 7 38 50 26 36</p>
-    <p><strong>Adresse :</strong> Avenue Baratier, Montmorency, 95160, France</p>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Contact</div>
+        <h3 class="title">Parlons de <span>votre projet</span></h3>
+        <p class="desc">
+          Décrivez votre besoin (type de chantier, surface, urgence, localisation) et nous vous répondrons rapidement.
+        </p>
+      </div>
+
+      <div class="contact">
+        <div class="box">
+          <p><strong>Entreprise :</strong> Faithworks Restoration Project LLC</p>
+          <p><strong>Adresse :</strong> 15340 Vanowen St APT 312, Van Nuys, CA 91406-6379, United States</p>
+          <p><strong>Email :</strong> info@faithworksrestoration.shop</p>
+          <p><strong>Téléphone :</strong> (484) 890-7160</p>
+          <p class="hint">Astuce : vous pouvez joindre des détails (photos, dimensions, délais souhaités) dans votre message.</p>
+
+          <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn btn-primary" href="mailto:info@faithworksrestoration.shop">Envoyer un email</a>
+            <a class="btn" href="tel:14848907160">Appeler maintenant</a>
+          </div>
+        </div>
+
+        <div class="box">
+          <form>
+            <div class="row">
+              <div>
+                <label for="name">Nom complet</label>
+                <input id="name" type="text" placeholder="Votre nom" />
+              </div>
+              <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="vous@exemple.com" />
+              </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+              <div>
+                <label for="phone">Téléphone</label>
+                <input id="phone" type="tel" placeholder="(xxx) xxx-xxxx" />
+              </div>
+              <div>
+                <label for="subject">Sujet</label>
+                <input id="subject" type="text" placeholder="Rénovation, réparation, restauration…" />
+              </div>
+            </div>
+
+            <div style="margin-top:10px;">
+              <label for="msg">Votre message</label>
+              <textarea id="msg" placeholder="Expliquez votre besoin : type de travaux, lieu, délais, budget estimé…"></textarea>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+              <button class="btn btn-primary" type="button">Envoyer (démo)</button>
+              <span class="hint">Formulaire vitrine (à connecter à un backend / email).</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 HUNANIMA - Tous droits réservés.</p>
+    © 2026 <b>Faithworks Restoration Project LLC</b> – Tous droits réservés
   </footer>
 
 </body>
